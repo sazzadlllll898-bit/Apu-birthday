@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Great Tutor | Zeba Apu Birthday</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  background: linear-gradient(135deg,#ff5488,#c471ed,#ffc1cc);
+  overflow-x: hidden;
+}
+
+.card {
+  width: 91%;
+  max-width: 440px;
+  padding: 26px 22px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.19);
+  border: 1px solid rgba(255,255,255,.5);
+  box-shadow: 0 15px 45px #64143c35;
+  backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 2;
+}
+
+.brand {
+  font-size: 12px;
+  letter-spacing: 5px;
+  font-weight: bold;
+  color: #fff4c7;
+}
+
+h1 { line-height: 1.35; }
+p { line-height: 1.8; }
+
+button {
+  display: block;
+  width: 100%;
+  padding: 14px 10px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 28px;
+  background: white;
+  color: #d52f75;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px #5c103020;
+}
+
+button:active { transform: scale(.97); }
+
+.small {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.heart {
+  font-size: 52px;
+  animation: heartbeat 1s infinite;
+}
+
+#effects {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.floaty {
+  position: absolute;
+  bottom: -50px;
+  animation: floatUp 5s linear forwards;
+}
+
+@keyframes heartbeat {
+  50% { transform: scale(1.12); }
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0) rotate(0); opacity: 1; }
+  to { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#game { animation: appear .5s ease; }
+</style>
+</head>
+
+<body>
+<div id="effects"></div>
+
+<main class="card">
+  <div class="brand">GREAT TUTOR</div>
+  <p class="small">A LITTLE SURPRISE MADE JUST FOR YOU ✨</p>
+  <div id="game"></div>
+</main>
+
+<script>
+const game = document.getElementById("game");
+const effects = document.getElementById("effects");
+
+function show(html) {
+  game.innerHTML = html;
+  game.style.animation = "none";
+  void game.offsetWidth;
+  game.style.animation = "appear .5s ease";
+}
+
+function home() {
+  show(`
+    <div class="heart">🎀</div>
+    <h1>Hey, Zeba Apu! 💗</h1>
+    <p>
+      Someone made a special surprise
+      just for you! 🥹<br><br>
+      But first, you must pass some
+      funny challenges. 😈
+    </p>
+    <button onclick="start()">LET'S PLAY 🎮</button>
+    <p class="small">WARNING: TOO MUCH CUTENESS AHEAD 💌</p>
+  `);
+}
+
+function start() {
+  show(`
+    <h1>🎂 HAPPY BIRTHDAY<br>ZEBA APU! 🎂</h1>
+    <p>Welcome to your very own birthday game! 💖</p>
+    <button onclick="level1()">START LEVEL 1 🌸</button>
+  `);
+}
+
+function level1() {
+  show(`
+    <h1>LEVEL 1: TRICK QUESTION 😂</h1>
+    <p>
+      Zeba Apu has 10 chocolates. 🍫<br>
+      She gives 3 to her little brother.<br>
+      How many chocolates does SHE have left? 🤔
+    </p>
+
+    <button onclick="wrong('Oops! 😂 You gave 3 chocolates away, so you have 7 left!')">
+      10 chocolates 🍫
+    </button>
+
+    <button onclick="wrong('Not quite, Apu! 🤭 Try subtracting 3 from 10!')">
+      13 chocolates 😜
+    </button>
+
+    <button onclick="level2()">
+      7 chocolates! 🎉
+    </button>
+  `);
+}
+
+function wrong(message) {
+  show(`
+    <div class="heart">😂🍫</div>
+    <h1>OOPS, ZEBA APU!</h1>
+    <p>${message}</p>
+    <p>Even birthday queens make mistakes! 👑</p>
+    <button onclick="level1()">TRY AGAIN 😈</button>
+  `);
+}
+
+function level2() {
+  show(`
+    <h1>LEVEL 2: IMPORTANT QUESTION 💌</h1>
+    <p>What does Zeba Apu deserve on her birthday?</p>
+
+    <button onclick="wrongGift()">A mountain of homework 📚</button>
+    <button onclick="wrongGift()">One tiny potato 🥔</button>
+    <button onclick="level3()">HAPPINESS, LOVE & SUCCESS! 💗</button>
+  `);
+}
+
+function wrongGift() {
+  show(`
+    <div class="heart">😂</div>
+    <h1>OBJECTION, APU!</h1>
+    <p>That gift has been rejected by the birthday committee! 🤣</p>
+    <button onclick="level2()">TRY AGAIN 🎁</button>
+  `);
+}
+
+function level3() {
+  show(`
+    <h1>LEVEL 3: FINAL CHALLENGE 😈</h1>
+    <p>Catch the birthday button to unlock your surprise!</p>
+
+    <button id="runner" onclick="finishGame()">
+      CATCH ME IF YOU CAN! 🏃
+    </button>
+
+    <button onclick="finishGame()">
+      I GIVE UP! SHOW MY SURPRISE 💖
+    </button>
+  `);
+
+  const runner = document.getElementById("runner");
+  let moves = 0;
+  const phrases = [
+    "TOO SLOW! 😂",
+    "ALMOST GOT ME! 🤭",
+    "NICE TRY! 😜",
+    "OKAY, YOU WIN! 🎉"
+  ];
+
+  runner.addEventListener("pointerenter", () => {
+    if (moves >= 4) return;
+    moves++;
+    runner.textContent = phrases[moves - 1];
+    runner.style.transform =
+      `translate(${Math.random()*24-12}px,${Math.random()*12-6}px)`;
+  });
+}
+
+function finishGame() {
+  celebration();
+  show(`
+    <div class="heart">🎉💖🎂</div>
+    <h1>YOU DID IT, ZEBA APU!</h1>
+    <p>You survived all the silly challenges! 😂</p>
+    <button onclick="birthdayMessage()">OPEN YOUR SPECIAL GIFT 🎁</button>
+  `);
+}
+
+function birthdayMessage() {
+  celebration();
+
+  show(`
+    <div class="heart">🎂💗</div>
+    <h1>HAPPY BIRTHDAY<br>ZEBA APU! 🎀</h1>
+
+    <p>
+      <b>Dear Zeba Apu, ❤️</b><br><br>
+
+      First of all, a very, very Happy Birthday
+      to you! 🎂✨<br><br>
+
+      I just want to take a moment to tell you
+      something from my heart.<br><br>
+
+      You may not realize it, but the way you
+      guide me, help me understand things, and
+      encourage me to become a better person
+      genuinely means a lot to me.<br><br>
+
+      What makes you special is not just what
+      you teach me, but the way you treat me
+      like your own little brother. That kindness
+      and care are things I truly appreciate.<br><br>
+
+      I'm really grateful to have someone like
+      you in my life—someone I can learn from,
+      look up to, and respect.<br><br>
+
+      On your special day, I wish you endless
+      happiness, good health, success, and all
+      the beautiful things you deserve. May every
+      dream you have come true, and may your
+      smile never fade.<br><br>
+
+      And I hope you always know that your
+      efforts, your kindness, and your guidance
+      never go unnoticed.<br><br>
+
+      <b>
+        Thank you for being more than just a
+        guide to me. Thank you for treating me
+        like family. 🥹❤️
+      </b><br><br>
+
+      No matter how busy life gets, I hope you
+      always keep that beautiful kindness
+      in your heart.<br><br>
+
+      🎂 <b>HAPPY BIRTHDAY, ZEBA APU!</b> 🎂<br><br>
+
+      May your life be filled with love, peace,
+      success, and countless reasons to smile.<br><br>
+
+      <b>
+        With lots of respect, gratitude, and love
+        from your little brother. 💗🌷
+      </b>
+    </p>
+
+    <button onclick="finalSurprise()">ONE LAST SURPRISE ✨</button>
+  `);
+}
+
+function finalSurprise() {
+  celebration();
+
+  show(`
+    <div class="heart">💖🌸💝</div>
+    <h1>JUST FOR YOU, ZEBA APU</h1>
+
+    <p>
+      This little game was made especially
+      for you, because special people deserve
+      special moments. 💌<br><br>
+
+      Thank you for guiding me, encouraging me,
+      and treating me like your own little brother.<br><br>
+
+      <b>
+        You are truly appreciated.<br>
+        Stay happy and keep shining! ✨
+      </b>
+    </p>
+
+    <div class="heart">❤️</div>
+    <button onclick="celebration()">MORE CONFETTI! 🎉</button>
+    <p class="small">MADE WITH LOVE, JUST FOR ZEBA APU</p>
+  `);
+}
+
+function celebration() {
+  const symbols = ["💗","💖","✨","🎉","🌸","🎂","💝"];
+
+  for (let i = 0; i < 45; i++) {
+    const el = document.createElement("span");
+    el.className = "floaty";
+    el.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
+
+    el.style.left = Math.random() * 100 + "%";
+    el.style.fontSize = (18 + Math.random() * 22) + "px";
+    el.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+    effects.appendChild(el);
+    setTimeout(() => el.remove(), 7500);
+  }
+}
+
+home();
+</script>
+</body>
+</html>
